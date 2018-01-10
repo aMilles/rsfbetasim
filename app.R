@@ -1,5 +1,4 @@
-shinyApp(
-  ui =shinyUI(fluidPage(
+ui =shinyUI(fluidPage(
     
     # Sidebar with a slider input for number of bins
     sidebarPanel(
@@ -13,7 +12,7 @@ shinyApp(
       tabsetPanel(type = "tabs", 
                   tabPanel('Bayes', shiny::plotOutput("leaflet_map")),
                   tabPanel('GLMM', shiny::plotOutput("circular_map"))
-      )))),
+      ))))
   server = shinyServer(function(input, output) {
     output$leaflet_map <- renderPlot({
       var <- ifelse(input$variation, 0.33, 0)
@@ -35,5 +34,3 @@ shinyApp(
       boxplot(axes = F, maptab[[3]], ylim = c(-1, 1), add = T, col = rgb(1,1,1, .5), main = "Distribution of betas of a GLMM vs. Truth (green)", pch = "")
     })
   }) # ,options = list(height = 480, width = 1050, dpi=200)
-  
-)
